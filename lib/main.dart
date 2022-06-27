@@ -83,6 +83,9 @@ class _MyHomePageState extends State<MyHomePage> {
         showAllNumbers: true,
         datetime: _getTimestamp(),
       ),
+      const TextField(
+        decoration: InputDecoration(hintText: 'HHMM'),
+      )
     ];
   }
 }
