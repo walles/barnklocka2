@@ -1,16 +1,15 @@
-# barnklocka2
+# Johans Barnklocka II
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## TODO
+* Set a random time on startup
+* Add a text entry field for entering the digital time
+* Add a "Go!" button next to the text entry field
+* If the text entry field is correct when the Go button is pressed, randomize a
+  new time on the analog clock and clear the field
+* If the text entry field is wrong when the Go button is pressed, highlight that
+  somehow. When the user starts editing the field, remove the highlight.
+* Enable the Go button only when the text field contains a valid (although not
+  necessarily correct) time
+* Set up CI for deploying to GitHub pages
+* Test it on somebody
+* ...
