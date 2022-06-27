@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:analog_clock/analog_clock.dart';
 import 'package:flutter/material.dart';
 
@@ -39,6 +41,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  DateTime? _timestamp;
+  final _random = Random();
+
+  DateTime _createRandomTimestamp() {
+    return DateTime(2000, 1, 1, _random.nextInt(24), _random.nextInt(60), 0);
+  }
+
+  DateTime _getTimestamp() {
+    _timestamp ??= _createRandomTimestamp();
+    return _timestamp!;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
         showSecondHand: false,
         showDigitalClock: false,
         showAllNumbers: true,
-        datetime: DateTime(2019, 1, 1, 9, 12, 0),
+        datetime: _getTimestamp(),
       ),
     ];
   }

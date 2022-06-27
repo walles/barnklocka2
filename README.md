@@ -1,7 +1,6 @@
 # Johans Barnklocka II
 
 ## TODO
-* Set a random time on startup
 * Add a text entry field for entering the digital time
 * Add a "Go!" button next to the text entry field
 * If the text entry field is correct when the Go button is pressed, randomize a
@@ -13,3 +12,6 @@
 * Set up CI for deploying to GitHub pages
 * Test it on somebody
 * ...
+
+### DONE
+* Set a random time on startup
