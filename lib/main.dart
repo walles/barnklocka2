@@ -1,3 +1,4 @@
+import 'package:analog_clock/analog_clock.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -101,6 +102,13 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
+            ),
+            AnalogClock(
+              height: 200,
+              showSecondHand: false,
+              showDigitalClock: false,
+              showAllNumbers: true,
+              datetime: DateTime(2019, 1, 1, 9, 12, 0),
             ),
           ],
         ),
