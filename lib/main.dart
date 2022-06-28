@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:analog_clock/analog_clock.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -75,10 +76,15 @@ class _MyHomePageState extends State<MyHomePage> {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Expanded(
+          Expanded(
             child: TextField(
-              // FIXME: Auto focus this field
-              decoration: InputDecoration(
+              autofocus: true,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(4),
+                FilteringTextInputFormatter.digitsOnly,
+              ],
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
                   hintText: 'HHMM', labelText: 'Time in digital'),
             ),
           ),
