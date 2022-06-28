@@ -107,7 +107,18 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _handleButtonPress() {
-    // FIXME: Compare text with correct answer and handle how it went
-    print(_timeInputController.text);
+    if (_isValidRendering(_timeInputController.text, _getTimestamp())) {
+      // FIXME: Randomize new time
+      // FIXME: Clear text field
+      print('Right!');
+    } else {
+      // FIXME: Print an error message
+      print('Wrong!');
+    }
   }
+}
+
+bool _isValidRendering(String rendering, DateTime timestamp) {
+  // FIXME: Write tests for this function!
+  return true;
 }

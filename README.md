@@ -5,6 +5,7 @@
   new time on the analog clock and clear the field
 * If the text entry field is wrong when the Go button is pressed, highlight that
   somehow. When the user starts editing the field, remove the highlight.
+* Show "First half of the day" / "Second half of the day"
 * Enable the Go button only when the text field contains a valid (although not
   necessarily correct) time
 * Set up CI for deploying to GitHub pages
