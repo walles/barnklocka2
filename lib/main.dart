@@ -33,6 +33,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   DateTime? _timestamp;
   final _random = Random();
+  final _timeInputController = TextEditingController();
 
   DateTime _createRandomTimestamp() {
     return DateTime(2000, 1, 1, _random.nextInt(24), _random.nextInt(60), 0);
@@ -41,6 +42,13 @@ class _MyHomePageState extends State<MyHomePage> {
   DateTime _getTimestamp() {
     _timestamp ??= _createRandomTimestamp();
     return _timestamp!;
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    _timeInputController.dispose();
+    super.dispose();
   }
 
   @override
@@ -78,6 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Expanded(
             child: TextField(
+              controller: _timeInputController,
               autofocus: true,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(4),
@@ -90,13 +99,15 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Flexible(
             child: ElevatedButton(
-                onPressed: () {
-                  // FIXME: Do clocky stuff here
-                },
-                child: const Text('Go!')),
+                onPressed: _handleButtonPress, child: const Text('Go!')),
           )
         ],
       )
     ];
+  }
+
+  void _handleButtonPress() {
+    // FIXME: Compare text with correct answer and handle how it went
+    print(_timeInputController.text);
   }
 }
