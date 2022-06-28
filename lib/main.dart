@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:intl/intl.dart';
 
 import 'package:analog_clock/analog_clock.dart';
 import 'package:flutter/material.dart';
@@ -122,6 +123,14 @@ class _MyHomePageState extends State<MyHomePage> {
 /// the timestamp's hours and minutes.
 @visibleForTesting
 bool isValidRendering(String rendering, DateTime timestamp) {
-  // FIXME: Write tests for this function!
-  return true;
+  final NumberFormat twoDigits = NumberFormat('00');
+
+  if (rendering.length == 3) {
+    rendering = '0$rendering';
+  }
+
+  final correct =
+      '${twoDigits.format(timestamp.hour)}${twoDigits.format(timestamp.minute)}';
+
+  return rendering == correct;
 }
