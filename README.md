@@ -1,6 +1,8 @@
 # Johans Barnklocka II
 
 ## TODO
+* Make the tests pass
+* Add CI running our tests
 * If the text entry field is correct when the Go button is pressed, randomize a
   new time on the analog clock and clear the field
 * If the text entry field is wrong when the Go button is pressed, highlight that
@@ -16,3 +18,4 @@
 * Set a random time on startup
 * Add a text entry field for entering the digital time
 * Add a "Go!" button next to the text entry field
+* Add initial tests

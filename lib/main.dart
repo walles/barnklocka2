@@ -107,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _handleButtonPress() {
-    if (_isValidRendering(_timeInputController.text, _getTimestamp())) {
+    if (isValidRendering(_timeInputController.text, _getTimestamp())) {
       // FIXME: Randomize new time
       // FIXME: Clear text field
       print('Right!');
@@ -118,7 +118,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-bool _isValidRendering(String rendering, DateTime timestamp) {
+/// Checks whether the rendering ("1234" for example) is a valid rendering of
+/// the timestamp's hours and minutes.
+@visibleForTesting
+bool isValidRendering(String rendering, DateTime timestamp) {
   // FIXME: Write tests for this function!
   return true;
 }
