@@ -83,8 +83,24 @@ class _MyHomePageState extends State<MyHomePage> {
         showAllNumbers: true,
         datetime: _getTimestamp(),
       ),
-      const TextField(
-        decoration: InputDecoration(hintText: 'HHMM'),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Expanded(
+            child: TextField(
+              // FIXME: Auto focus this field
+              decoration: InputDecoration(
+                  hintText: 'HHMM', labelText: 'Time in digital'),
+            ),
+          ),
+          Flexible(
+            child: ElevatedButton(
+                onPressed: () {
+                  // FIXME: Do clocky stuff here
+                },
+                child: const Text('Go!')),
+          )
+        ],
       )
     ];
   }
