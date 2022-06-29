@@ -34,7 +34,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   DateTime? _timestamp;
   final _random = Random();
-  final _timeInputController = TextEditingController();
+
+  late TextEditingController _timeInputController;
 
   DateTime _createRandomTimestamp() {
     return DateTime(2000, 1, 1, _random.nextInt(24), 0, 0);
@@ -43,6 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
   DateTime _getTimestamp() {
     _timestamp ??= _createRandomTimestamp();
     return _timestamp!;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _timeInputController = TextEditingController();
   }
 
   @override
@@ -96,6 +103,10 @@ class _MyHomePageState extends State<MyHomePage> {
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                   hintText: 'HHMM', labelText: 'Time in digital'),
+              onSubmitted: (String _) {
+                // FIXME: Only if the input looks like a time!
+                _handleButtonPress();
+              },
             ),
           ),
           Flexible(
@@ -109,12 +120,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _handleButtonPress() {
     if (isValidRendering(_timeInputController.text, _getTimestamp())) {
-      // FIXME: Randomize new time
-      // FIXME: Clear text field
-      print('Right!');
+      // FIXME: Play a Ding! sound
+
+      _timeInputController.clear();
+      setState(() {
+        _timestamp = _createRandomTimestamp();
+      });
+
+      // FIXME: Focus the text field
     } else {
       // FIXME: Print an error message
-      print('Wrong!');
+      print('Wrong! ${_getTimestamp()}');
     }
   }
 }
