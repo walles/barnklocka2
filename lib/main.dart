@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final _timeInputController = TextEditingController();
 
   DateTime _createRandomTimestamp() {
-    return DateTime(2000, 1, 1, _random.nextInt(24), _random.nextInt(60), 0);
+    return DateTime(2000, 1, 1, _random.nextInt(24), 0, 0);
   }
 
   DateTime _getTimestamp() {
