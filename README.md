@@ -1,10 +1,10 @@
 # Johans Barnklocka II
 
 ## TODO
-* Show "First half of the day" / "Second half of the day" so that we don't have
-  to guess
 * If the text entry field is wrong when the Go button is pressed, highlight that
   somehow. When the user starts editing the field, remove the highlight.
+* Show "First half of the day" / "Second half of the day" so that we don't have
+  to guess
 * Show "First half of the day" / "Second half of the day"
 * Enable the Go button and text field entry only when the text field contains a
   valid (although not necessarily correct) time
@@ -12,6 +12,7 @@
 * Refocus text field after user presses Enter or clicks the Go! button
 * Test it on somebody
 * ...
+* Consider reenabling `avoid_print` in `analysis_options.yaml`
 
 ### DONE
 * Set a random time on startup

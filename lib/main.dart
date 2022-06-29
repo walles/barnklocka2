@@ -129,7 +129,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
       // FIXME: Focus the text field
     } else {
-      // FIXME: Print an error message
+      // FIXME: Somehow highlight this to the user
+
       print('Wrong! ${_getTimestamp()}');
     }
   }
