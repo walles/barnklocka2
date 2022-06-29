@@ -10,5 +10,5 @@ jobs:
           flutter-version: '3.0.1'
           channel: 'stable'
       - run: flutter format --output=none --set-exit-if-changed lib/ test/
-      # FIXME: - run: flutter analyze
+      - run: flutter analyze
       - run: flutter test
