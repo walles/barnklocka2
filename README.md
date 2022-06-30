@@ -1,8 +1,8 @@
 # Johans Barnklocka II
 
 ## TODO
-* If the text entry field is wrong when the Go button is pressed, highlight that
-  somehow. When the user starts editing the field, remove the highlight.
+* Handle <https://github.com/furkantektas/analog_clock/issues/16>, maybe draw
+  our own clock?
 * Show "First half of the day" / "Second half of the day" so that we don't have
   to guess
 * Show "First half of the day" / "Second half of the day"
@@ -23,3 +23,5 @@
 * Add CI running our tests
 * If the text entry field is correct when the Go button is pressed, randomize a
   new time on the analog clock and clear the field
+* If the text entry field is wrong when the Go button is pressed, highlight that
+  somehow.

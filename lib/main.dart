@@ -33,6 +33,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   DateTime? _timestamp;
+  String? _errorText;
   final _random = Random();
 
   late TextEditingController _timeInputController;
@@ -101,8 +102,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 FilteringTextInputFormatter.digitsOnly,
               ],
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                  hintText: 'HHMM', labelText: 'Time in digital'),
+              decoration: InputDecoration(
+                  hintText: 'HHMM',
+                  labelText: 'Time in digital',
+                  errorText: _errorText),
               onSubmitted: (String _) {
                 // FIXME: Only if the input looks like a time!
                 _handleButtonPress();
@@ -124,14 +127,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
       _timeInputController.clear();
       setState(() {
+        _errorText = null;
         _timestamp = _createRandomTimestamp();
       });
 
       // FIXME: Focus the text field
     } else {
-      // FIXME: Somehow highlight this to the user
-
-      print('Wrong! ${_getTimestamp()}');
+      final twoDigits = NumberFormat('00');
+      final hour = _getTimestamp().hour;
+      final minute = _getTimestamp().minute;
+      setState(() {
+        _errorText =
+            'Digital time is ${twoDigits.format(hour)}${twoDigits.format(minute)}';
+      });
     }
   }
 }
@@ -140,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
 /// the timestamp's hours and minutes.
 @visibleForTesting
 bool isValidRendering(String rendering, DateTime timestamp) {
-  final NumberFormat twoDigits = NumberFormat('00');
+  final twoDigits = NumberFormat('00');
 
   if (rendering.length == 3) {
     rendering = '0$rendering';
