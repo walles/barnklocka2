@@ -83,9 +83,10 @@ class _MyHomePageState extends State<MyHomePage> {
   /// These widgets will be shown in a column in the main UI
   List<Widget> _mainUi() {
     return [
-      const Clock(
-          // FIXME: datetime: _getTimestamp(),
-          ),
+      Clock(
+        _getTimestamp().hour,
+        _getTimestamp().minute,
+      ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

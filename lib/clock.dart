@@ -1,10 +1,15 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
 class Clock extends StatefulWidget {
-  const Clock({Key? key}) : super(key: key);
+  final int _hours;
+  final int _minutes;
+
+  const Clock(int hours, int minutes, {Key? key})
+      : _hours = hours,
+        _minutes = minutes,
+        super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -17,12 +22,20 @@ class _Clock extends State<Clock> {
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 1.0,
-      child: CustomPaint(painter: _ClockPainter()),
+      child:
+          CustomPaint(painter: _ClockPainter(widget._hours, widget._minutes)),
     );
   }
 }
 
 class _ClockPainter extends CustomPainter {
+  final int _hours;
+  final int _minutes;
+
+  _ClockPainter(int hours, int minutes)
+      : _hours = hours,
+        _minutes = minutes;
+
   @override
   void paint(Canvas canvas, Size size) {
     // We should be inside an AspectRatio(1.0) widget
@@ -34,8 +47,8 @@ class _ClockPainter extends CustomPainter {
 
     _paintClockFaceBackground(canvas, size.width);
     _paintNumbers(canvas, size.width);
+    _paintHourHand(canvas, size.width);
 
-    // FIXME: Draw hour hand
     // FIXME: Draw minute hand
     // FIXME: Draw some ticks? Find a reference image!
   }
@@ -77,6 +90,14 @@ class _ClockPainter extends CustomPainter {
       painter.paint(
           canvas, Offset(x - painter.width / 2, y - painter.height / 2));
     }
+  }
+
+  void _paintHourHand(Canvas canvas, double diameter) {
+    const fullRotation = pi * 2;
+    final rotationFraction = (_hours / 12.0) + (_minutes / (12 * 60));
+    final rotation = fullRotation * rotationFraction;
+
+    // FIXME: Draw the hour hand with the given rotation
   }
 
   @override
