@@ -83,11 +83,29 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// These widgets will be shown in a column in the main UI
   List<Widget> _mainUi() {
+    final ampm = _getTimestamp().hour < 12
+        ? 'First half of the day'
+        : 'Second half of the day';
+
     return [
       Clock(
         _getTimestamp().hour,
         _getTimestamp().minute,
       ),
+      //
+      // ----------------------------------------------
+      //
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          ampm,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 25),
+        ),
+      ),
+      //
+      // ----------------------------------------------
+      //
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
