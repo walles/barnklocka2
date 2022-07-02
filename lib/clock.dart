@@ -47,10 +47,11 @@ class _ClockPainter extends CustomPainter {
 
     _paintClockFaceBackground(canvas, size.width);
     _paintNumbers(canvas, size.width);
+
     _paintHourHand(canvas, size.width);
     _paintMinuteHand(canvas, size.width);
 
-    // FIXME: Draw some ticks? Find a reference image!
+    _paintMinuteTicks(canvas, size.width);
   }
 
   void _paintClockFaceBackground(Canvas canvas, double diameter) {
@@ -131,6 +132,42 @@ class _ClockPainter extends CustomPainter {
     const lengthFraction = .9;
     _paintHand(
         canvas, diameter, rotationFraction, widthFraction, lengthFraction);
+  }
+
+  void _paintMinuteTicks(Canvas canvas, double diameter) {
+    const count = 60;
+
+    final radius = diameter / 2;
+    final length = radius * .05;
+    final width = radius * .01;
+
+    final paint = Paint();
+    paint.strokeWidth = width;
+    paint.color = Colors.black;
+    paint.style = PaintingStyle.stroke;
+
+    const fullRotation = pi * 2;
+
+    canvas.save();
+    try {
+      canvas.translate(radius, radius);
+      for (int i = 0; i < count; i++) {
+        final rotationFraction = i / count;
+        final rotation = fullRotation * rotationFraction;
+
+        final outerRadius = radius - length * .5;
+        final innerRadius = radius - length * 1.5;
+
+        final inner =
+            Offset(innerRadius * sin(rotation), innerRadius * cos(rotation));
+        final outer =
+            Offset(outerRadius * sin(rotation), outerRadius * cos(rotation));
+
+        canvas.drawLine(inner, outer, paint);
+      }
+    } finally {
+      canvas.restore();
+    }
   }
 
   @override
