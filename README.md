@@ -13,6 +13,7 @@
 * Test it on somebody
 * ...
 * Consider reenabling `avoid_print` in `analysis_options.yaml`
+* Adapt clock and everything else to dark theme / light theme
 
 ### DONE
 * Set a random time on startup
