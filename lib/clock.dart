@@ -48,8 +48,8 @@ class _ClockPainter extends CustomPainter {
     _paintClockFaceBackground(canvas, size.width);
     _paintNumbers(canvas, size.width);
     _paintHourHand(canvas, size.width);
+    _paintMinuteHand(canvas, size.width);
 
-    // FIXME: Draw minute hand
     // FIXME: Draw some ticks? Find a reference image!
   }
 
@@ -92,14 +92,15 @@ class _ClockPainter extends CustomPainter {
     }
   }
 
-  void _paintHourHand(Canvas canvas, double diameter) {
+  void _paintHand(Canvas canvas, double diameter, double rotationFraction,
+      double widthFraction, double lengthFraction) {
     const fullRotation = pi * 2;
-    final rotationFraction = (_hours / 12.0) + (_minutes / (12 * 60));
     final rotation = fullRotation * rotationFraction;
-    final radius = diameter / 2;
 
-    final width = radius * .1;
-    final length = radius * .65;
+    final radius = diameter / 2;
+    final width = radius * widthFraction;
+    final length = radius * lengthFraction;
+    final backExtent = radius * .1;
 
     final paint = Paint();
     paint.strokeWidth = width;
@@ -110,10 +111,26 @@ class _ClockPainter extends CustomPainter {
     try {
       canvas.translate(radius, radius);
       canvas.rotate(rotation);
-      canvas.drawLine(Offset(0, width), Offset(0, -length), paint);
+      canvas.drawLine(Offset(0, backExtent), Offset(0, -length), paint);
     } finally {
       canvas.restore();
     }
+  }
+
+  void _paintHourHand(Canvas canvas, double diameter) {
+    final rotationFraction = (_hours / 12.0) + (_minutes / (12 * 60));
+    const widthFraction = .1;
+    const lengthFraction = .65;
+    _paintHand(
+        canvas, diameter, rotationFraction, widthFraction, lengthFraction);
+  }
+
+  void _paintMinuteHand(Canvas canvas, double diameter) {
+    final rotationFraction = _minutes / 60;
+    const widthFraction = .05;
+    const lengthFraction = .9;
+    _paintHand(
+        canvas, diameter, rotationFraction, widthFraction, lengthFraction);
   }
 
   @override
