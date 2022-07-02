@@ -39,7 +39,7 @@ class _ClockPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     // We should be inside an AspectRatio(1.0) widget
-    assert(size.width == size.height);
+    assert((size.width - size.height) < 1.0, '${size.width} vs ${size.height}');
 
     // FIXME: Maybe drop one or both of these lines?
     canvas.clipRect(Rect.fromLTRB(0, 0, size.width, size.height));
@@ -96,8 +96,24 @@ class _ClockPainter extends CustomPainter {
     const fullRotation = pi * 2;
     final rotationFraction = (_hours / 12.0) + (_minutes / (12 * 60));
     final rotation = fullRotation * rotationFraction;
+    final radius = diameter / 2;
 
-    // FIXME: Draw the hour hand with the given rotation
+    final width = radius * .1;
+    final length = radius * .65;
+
+    final paint = Paint();
+    paint.strokeWidth = width;
+    paint.color = Colors.black;
+    paint.style = PaintingStyle.stroke;
+
+    canvas.save();
+    try {
+      canvas.translate(radius, radius);
+      canvas.rotate(rotation);
+      canvas.drawLine(Offset(0, width), Offset(0, -length), paint);
+    } finally {
+      canvas.restore();
+    }
   }
 
   @override

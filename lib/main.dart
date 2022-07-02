@@ -44,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   DateTime _getTimestamp() {
     _timestamp ??= _createRandomTimestamp();
+    print('New timestamp: $_timestamp');
     return _timestamp!;
   }
 
