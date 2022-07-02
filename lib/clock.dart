@@ -41,10 +41,6 @@ class _ClockPainter extends CustomPainter {
     // We should be inside an AspectRatio(1.0) widget
     assert((size.width - size.height) < 1.0, '${size.width} vs ${size.height}');
 
-    // FIXME: Maybe drop one or both of these lines?
-    canvas.clipRect(Rect.fromLTRB(0, 0, size.width, size.height));
-    canvas.drawColor(Colors.green, BlendMode.src);
-
     _paintClockFaceBackground(canvas, size.width);
     _paintNumbers(canvas, size.width);
 
