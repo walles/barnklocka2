@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:intl/intl.dart';
 
-import 'package:analog_clock/analog_clock.dart';
+import 'package:barnklocka2/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -83,13 +83,9 @@ class _MyHomePageState extends State<MyHomePage> {
   /// These widgets will be shown in a column in the main UI
   List<Widget> _mainUi() {
     return [
-      AnalogClock(
-        height: 200, // FIXME: "height: same-as-the-width"?
-        showSecondHand: false,
-        showDigitalClock: false,
-        showAllNumbers: true,
-        datetime: _getTimestamp(),
-      ),
+      const Clock(
+          // FIXME: datetime: _getTimestamp(),
+          ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
