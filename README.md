@@ -3,6 +3,7 @@
 ## TODO
 * Handle <https://github.com/furkantektas/analog_clock/issues/16>, maybe draw
   our own clock?
+* Tune clock vs real-world clock image to make it readable and look nice
 * Show "First half of the day" / "Second half of the day" so that we don't have
   to guess
 * Show "First half of the day" / "Second half of the day"
