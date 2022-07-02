@@ -3,6 +3,7 @@
 ## TODO
 * Handle <https://github.com/furkantektas/analog_clock/issues/16>, maybe draw
   our own clock?
+* Tune clock vs real-world clock image to make it readable and look nice
 * Show "First half of the day" / "Second half of the day" so that we don't have
   to guess
 * Show "First half of the day" / "Second half of the day"
@@ -13,6 +14,7 @@
 * Test it on somebody
 * ...
 * Consider reenabling `avoid_print` in `analysis_options.yaml`
+* Adapt clock and everything else to dark theme / light theme
 
 ### DONE
 * Set a random time on startup
