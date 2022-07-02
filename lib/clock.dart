@@ -52,6 +52,7 @@ class _ClockPainter extends CustomPainter {
     _paintMinuteHand(canvas, size.width);
 
     _paintMinuteTicks(canvas, size.width);
+    _paintHourTicks(canvas, size.width);
   }
 
   void _paintClockFaceBackground(Canvas canvas, double diameter) {
@@ -134,12 +135,11 @@ class _ClockPainter extends CustomPainter {
         canvas, diameter, rotationFraction, widthFraction, lengthFraction);
   }
 
-  void _paintMinuteTicks(Canvas canvas, double diameter) {
-    const count = 60;
-
+  void _paintTicks(Canvas canvas, double diameter, int count,
+      double lengthFactor, double widthFactor) {
     final radius = diameter / 2;
-    final length = radius * .05;
-    final width = radius * .01;
+    final length = radius * lengthFactor;
+    final width = radius * widthFactor;
 
     final paint = Paint();
     paint.strokeWidth = width;
@@ -168,6 +168,14 @@ class _ClockPainter extends CustomPainter {
     } finally {
       canvas.restore();
     }
+  }
+
+  void _paintMinuteTicks(Canvas canvas, double diameter) {
+    _paintTicks(canvas, diameter, 60, .05, .01);
+  }
+
+  void _paintHourTicks(Canvas canvas, double diameter) {
+    _paintTicks(canvas, diameter, 12, .05, .03);
   }
 
   @override
