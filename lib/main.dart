@@ -10,6 +10,36 @@ void main() {
 }
 
 const _name = 'Johans Barnklocka II';
+const _ampm = [
+  // 0-5
+  'Midnight',
+  'Morning',
+  'Morning',
+  'Morning',
+  'Morning',
+  'Morning',
+  // 6-11
+  'Morning',
+  'Morning',
+  'Morning',
+  'Morning',
+  'Morning',
+  'Morning',
+  // 12-17
+  'Noon',
+  'Afternoon',
+  'Afternoon',
+  'Afternoon',
+  'Afternoon',
+  'Afternoon',
+  // 18-23
+  'Evening',
+  'Evening',
+  'Evening',
+  'Evening',
+  'Evening',
+  'Evening',
+];
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -85,10 +115,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// These widgets will be shown in a column in the main UI
   List<Widget> _mainUi() {
-    final ampm = _getTimestamp().hour < 12
-        ? 'First half of the day'
-        : 'Second half of the day';
-
     return [
       ////////////////////////////////////////////////////
       //
@@ -107,9 +133,9 @@ class _MyHomePageState extends State<MyHomePage> {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          ampm,
+          _ampm[_getTimestamp().hour],
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 25),
+          style: const TextStyle(fontSize: 35),
         ),
       ),
       ////////////////////////////////////////////////////

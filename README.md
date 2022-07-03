@@ -3,9 +3,8 @@
 # Johans Barnklocka II
 
 ## TODO
-* Prevent the AM/PM text from wrapping on smaller displays, prefer shrinking the
-  font size: https://pub.dev/packages/auto_size_text
-* Test it on somebody
+* Choose among whole hours, half hours, quarters, five minute spans or one
+  minute spans. Pick easier flavors more often.
 * ...
 * Tune clock vs real-world clock image to make it readable and look nice
 * Consider reenabling `avoid_print` in `analysis_options.yaml`
@@ -39,3 +38,6 @@
   * OK: Make it work in a larger window
     * OK: Correct answer
     * OK: Incorrect answer
+* Test it on somebody
+* Prevent the AM/PM text from wrapping on smaller displays, prefer shrinking the
+  font size: https://pub.dev/packages/auto_size_text
