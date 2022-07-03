@@ -91,9 +91,11 @@ class _MyHomePageState extends State<MyHomePage> {
         : 'Second half of the day';
 
     return [
-      Clock(
-        _getTimestamp().hour,
-        _getTimestamp().minute,
+      Expanded(
+        child: Clock(
+          _getTimestamp().hour,
+          _getTimestamp().minute,
+        ),
       ),
       //
       // ----------------------------------------------

@@ -3,6 +3,8 @@
 # Johans Barnklocka II
 
 ## TODO
+* Prevent the AM/PM text from wrapping on smaller displays, prefer shrinking the
+  font size
 * Test it on somebody
 * ...
 * Tune clock vs real-world clock image to make it readable and look nice
@@ -28,3 +30,5 @@
   to guess
 * Refocus text field after user presses Enter or clicks the Go! button
 * Set up CI for deploying to GitHub pages
+* Make it work at 262x352 window size. This emulates what I have on my phone
+  with the keyboard up.
