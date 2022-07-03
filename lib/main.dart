@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'package:barnklocka2/timepicker.dart';
 import 'package:intl/intl.dart';
 
 import 'package:barnklocka2/clock.dart';
@@ -64,17 +64,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   DateTime? _timestamp;
   String? _errorText;
-  final _random = Random();
+  final _timePicker = TimePicker();
 
   late TextEditingController _timeInputController;
   late FocusNode _timeInputFocus;
 
-  DateTime _createRandomTimestamp() {
-    return DateTime(2000, 1, 1, _random.nextInt(24), 0, 0);
-  }
-
   DateTime _getTimestamp() {
-    _timestamp ??= _createRandomTimestamp();
+    _timestamp ??= _timePicker.createRandomTimestamp();
     return _timestamp!;
   }
 
@@ -182,7 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _timeInputController.clear();
       setState(() {
         _errorText = null;
-        _timestamp = _createRandomTimestamp();
+        _timestamp = _timePicker.createRandomTimestamp();
       });
     } else {
       final twoDigits = NumberFormat('00');

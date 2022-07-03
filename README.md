@@ -5,9 +5,13 @@
 Run it here: <https://walles.github.io/barnklocka2>
 
 ## TODO
-* Choose among whole hours, half hours, quarters, five minute spans or one
-  minute spans. Pick easier flavors more often.
-* ...
+* Turn this into a game!
+  * A round starts at kind 1, asks 2 questions of each kind for a total of 10
+    questions.
+  * Scoring is primarily by the number-of-right-answers-on-the-first-attempt,
+    and secondarily by how long the whole round took.
+  * Show a high score list at the end with the top 5 best results. This must
+    persist between reloads.
 * Tune clock vs real-world clock image to make it readable and look nice
 * Consider reenabling `avoid_print` in `analysis_options.yaml`
 * Adapt clock and everything else to dark theme / light theme
@@ -43,3 +47,5 @@ Run it here: <https://walles.github.io/barnklocka2>
 * Test it on somebody
 * Prevent the AM/PM text from wrapping on smaller displays, prefer shrinking the
   font size: https://pub.dev/packages/auto_size_text
+* Choose among whole hours, half hours, quarters, five minute spans or one
+  minute spans. Pick easier flavors more often.
