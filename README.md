@@ -3,13 +3,6 @@
 # Johans Barnklocka II
 
 ## TODO
-* At the same time
-  * OK: Make it work at 229x352 window size
-    * OK: Correct answer
-    * OK: Incorrect answer
-  * Make it work in a larger window
-    * Correct answer
-    * Incorrect answer
 * Prevent the AM/PM text from wrapping on smaller displays, prefer shrinking the
   font size: https://pub.dev/packages/auto_size_text
 * Test it on somebody
@@ -39,3 +32,10 @@
 * Set up CI for deploying to GitHub pages
 * Make it work at 262x352 window size. This emulates what I have on my phone
   with the keyboard up.
+* At the same time
+  * OK: Make it work at 229x352 window size
+    * OK: Correct answer
+    * OK: Incorrect answer
+  * OK: Make it work in a larger window
+    * OK: Correct answer
+    * OK: Incorrect answer

@@ -45,7 +45,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   DateTime _getTimestamp() {
     _timestamp ??= _createRandomTimestamp();
-    print('New timestamp: $_timestamp');
     return _timestamp!;
   }
 
@@ -95,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
       //
       // Clock
       //
-      Expanded(
+      Flexible(
         child: Clock(
           _getTimestamp().hour,
           _getTimestamp().minute,
@@ -165,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
       final minute = _getTimestamp().minute;
       setState(() {
         _errorText =
-            'Digital time: ${twoDigits.format(hour)}${twoDigits.format(minute)}';
+            'Should be: ${twoDigits.format(hour)}${twoDigits.format(minute)}';
       });
     }
 
