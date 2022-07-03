@@ -1,3 +1,5 @@
+[![test-and-deploy](https://github.com/walles/barnklocka2/actions/workflows/test-and-deploy.yaml/badge.svg)](https://github.com/walles/barnklocka2/actions/workflows/test-and-deploy.yaml)
+
 # Johans Barnklocka II
 
 ## TODO
