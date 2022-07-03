@@ -91,14 +91,19 @@ class _MyHomePageState extends State<MyHomePage> {
         : 'Second half of the day';
 
     return [
+      ////////////////////////////////////////////////////
+      //
+      // Clock
+      //
       Expanded(
         child: Clock(
           _getTimestamp().hour,
           _getTimestamp().minute,
         ),
       ),
+      ////////////////////////////////////////////////////
       //
-      // ----------------------------------------------
+      // AM / PM text
       //
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -108,8 +113,9 @@ class _MyHomePageState extends State<MyHomePage> {
           style: const TextStyle(fontSize: 25),
         ),
       ),
+      ////////////////////////////////////////////////////
       //
-      // ----------------------------------------------
+      // Answer entry row
       //
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -126,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   hintText: 'HHMM',
-                  labelText: 'Time in digital',
+                  labelText: 'Digital time',
                   errorText: _errorText),
               onSubmitted: (String _) {
                 // FIXME: Only if the input looks like a time!
@@ -135,6 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Flexible(
+            flex: 0,
             child: ElevatedButton(
                 onPressed: _handleButtonPress, child: const Text('Go!')),
           )
@@ -158,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
       final minute = _getTimestamp().minute;
       setState(() {
         _errorText =
-            'Digital time is ${twoDigits.format(hour)}${twoDigits.format(minute)}';
+            'Digital time: ${twoDigits.format(hour)}${twoDigits.format(minute)}';
       });
     }
 

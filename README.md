@@ -3,8 +3,15 @@
 # Johans Barnklocka II
 
 ## TODO
+* At the same time
+  * OK: Make it work at 229x352 window size
+    * OK: Correct answer
+    * OK: Incorrect answer
+  * Make it work in a larger window
+    * Correct answer
+    * Incorrect answer
 * Prevent the AM/PM text from wrapping on smaller displays, prefer shrinking the
-  font size
+  font size: https://pub.dev/packages/auto_size_text
 * Test it on somebody
 * ...
 * Tune clock vs real-world clock image to make it readable and look nice
