@@ -1,7 +1,9 @@
-name: test
+# Run tests and deploy to https://walles.github.io/barnklocka2.
+
+name: test-and-deploy
 on: [push]
 jobs:
-  test:
+  test-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -12,3 +14,9 @@ jobs:
       - run: flutter format --output=none --set-exit-if-changed lib/ test/
       - run: flutter analyze
       - run: flutter test
+
+      # Deploy new main commits to Github pages
+      - uses: bluefireteam/flutter-gh-pages@v7
+        if: github.ref == 'refs/heads/main'
+        with:
+          baseHref: /barnklocka2/
