@@ -2,6 +2,8 @@
 
 # Johans Barnklocka II
 
+Run it here: <https://walles.github.io/barnklocka2>
+
 ## TODO
 * Choose among whole hours, half hours, quarters, five minute spans or one
   minute spans. Pick easier flavors more often.
