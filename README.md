@@ -1,15 +1,14 @@
 # Johans Barnklocka II
 
 ## TODO
-* Refocus text field after user presses Enter or clicks the Go! button
-* Enable the Go button and text field entry only when the text field contains a
-  valid (although not necessarily correct) time
 * Set up CI for deploying to GitHub pages
 * Test it on somebody
 * ...
 * Tune clock vs real-world clock image to make it readable and look nice
 * Consider reenabling `avoid_print` in `analysis_options.yaml`
 * Adapt clock and everything else to dark theme / light theme
+* Enable the Go button and text field entry only when the text field contains a
+  valid (although not necessarily correct) time
 
 ### DONE
 * Set a random time on startup
@@ -26,3 +25,4 @@
   clock.
 * Show "First half of the day" / "Second half of the day" so that we don't have
   to guess
+* Refocus text field after user presses Enter or clicks the Go! button

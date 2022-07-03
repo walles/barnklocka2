@@ -37,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final _random = Random();
 
   late TextEditingController _timeInputController;
+  late FocusNode _timeInputFocus;
 
   DateTime _createRandomTimestamp() {
     return DateTime(2000, 1, 1, _random.nextInt(24), 0, 0);
@@ -52,12 +53,14 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _timeInputController = TextEditingController();
+    _timeInputFocus = FocusNode();
   }
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
     _timeInputController.dispose();
+    _timeInputFocus.dispose();
     super.dispose();
   }
 
@@ -112,6 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Expanded(
             child: TextField(
               controller: _timeInputController,
+              focusNode: _timeInputFocus,
               autofocus: true,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(4),
@@ -146,8 +150,6 @@ class _MyHomePageState extends State<MyHomePage> {
         _errorText = null;
         _timestamp = _createRandomTimestamp();
       });
-
-      // FIXME: Focus the text field
     } else {
       final twoDigits = NumberFormat('00');
       final hour = _getTimestamp().hour;
@@ -157,6 +159,8 @@ class _MyHomePageState extends State<MyHomePage> {
             'Digital time is ${twoDigits.format(hour)}${twoDigits.format(minute)}';
       });
     }
+
+    _timeInputFocus.requestFocus();
   }
 }
 
