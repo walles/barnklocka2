@@ -1,5 +1,6 @@
 import 'package:barnklocka2/gamestate.dart';
 import 'package:barnklocka2/gamestats.dart';
+import 'package:barnklocka2/toplist.dart';
 import 'package:intl/intl.dart';
 
 import 'package:barnklocka2/clock.dart';
@@ -109,26 +110,53 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  String _durationToString(Duration duration) {
+    int minutes = duration.inSeconds ~/ 60;
+    int milliseconds = duration.inMilliseconds % 60000;
+
+    if (minutes == 0) {
+      return '${(milliseconds / 1000).toStringAsFixed(3)}s';
+    } else {
+      NumberFormat secondsFormat = NumberFormat('00.###');
+      return '${minutes}m${secondsFormat.format(milliseconds / 1000.0)}s';
+    }
+  }
+
+  Widget _topListToWidget(TopList topList) {
+    assert(!topList.isEmpty());
+
+    final List<DataColumn> columns = [
+      const DataColumn(
+          label: Text('Correct'), tooltip: 'Correct on first attempt'),
+      const DataColumn(label: Text('Duration')),
+      const DataColumn(label: SizedBox.shrink()),
+    ];
+
+    List<DataRow> rows = [];
+    for (int i = 0; i < topList.list().length; i++) {
+      GameStats stats = topList.list()[i];
+      String lastCell = '';
+      if (i == topList.mostRecentEntry()) {
+        lastCell = '<- You'; // ... are here
+      }
+
+      rows.add(DataRow(cells: [
+        DataCell(Text(
+            '${stats.correctOnFirstAttempt}/${GameState.questionsPerGame}')),
+        DataCell(Text(_durationToString(stats.duration))),
+        DataCell(Text(lastCell))
+      ]));
+    }
+
+    return DataTable(columns: columns, rows: rows);
+  }
+
   Column _startScreen() {
     List<Widget> widgets = [];
 
-    GameStats? stats = _gameState.lastGameStats();
-    if (stats != null) {
-      int minutes = stats.duration.inSeconds ~/ 60;
-      int milliseconds = stats.duration.inMilliseconds % 60000;
-
-      String durationString;
-      if (minutes == 0) {
-        durationString = '${(milliseconds / 1000).toStringAsFixed(3)}s';
-      } else {
-        NumberFormat secondsFormat = NumberFormat('00.###');
-        durationString =
-            '${minutes}m${secondsFormat.format(milliseconds / 1000.0)}s';
-      }
-
-      widgets.add(Text(
-          'Last round had ${stats.correctOnFirstAttempt}/${GameState.questionsPerGame} '
-          'answers right on the first attempt, and lasted for $durationString.'));
+    TopList topList = _gameState.topList();
+    if (!topList.isEmpty()) {
+      widgets.add(_topListToWidget(topList));
     }
 
     widgets.add(SizedBox(
@@ -139,11 +167,12 @@ class _MyHomePageState extends State<MyHomePage> {
               _gameState.start();
             });
           },
+          autofocus: true,
           child: const Text('Start')),
     ));
 
     return Column(
-        mainAxisAlignment: MainAxisAlignment.center, children: widgets);
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: widgets);
   }
 
   Column _gameUi() {

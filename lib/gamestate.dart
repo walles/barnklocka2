@@ -1,11 +1,12 @@
 import 'package:barnklocka2/gamestats.dart';
 import 'package:barnklocka2/timepicker.dart';
-import 'package:flutter/material.dart';
+import 'package:barnklocka2/toplist.dart';
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
 class GameState {
   static const _startScreenNumber = 0;
-  static const questionsPerGame = 2; // FIXME: I think 10 is a good number
+  static const questionsPerGame = kDebugMode ? 2 : 10;
 
   final _timePicker = TimePicker();
 
@@ -16,7 +17,7 @@ class GameState {
   int _correctOnFirstAttempt = 0;
   bool _lastAnswerWasRight = true;
 
-  GameStats? _lastGameStats;
+  final TopList _toplist = TopList(5);
 
   /// Question number `0` means we're on the start screen
   int _questionNumberOneBased = _startScreenNumber;
@@ -60,8 +61,8 @@ class GameState {
     if (_questionNumberOneBased > questionsPerGame) {
       // Back to the start screen
       _questionNumberOneBased = _startScreenNumber;
-      _lastGameStats = GameStats(
-          DateTime.now().difference(_gameStartTime!), _correctOnFirstAttempt);
+      _toplist.add(GameStats(
+          DateTime.now().difference(_gameStartTime!), _correctOnFirstAttempt));
     }
 
     onCorrect();
@@ -69,8 +70,8 @@ class GameState {
     return true;
   }
 
-  GameStats? lastGameStats() {
-    return _lastGameStats;
+  TopList topList() {
+    return _toplist;
   }
 }
 
