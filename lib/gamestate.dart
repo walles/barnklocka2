@@ -59,7 +59,6 @@ class GameState {
     _questionNumberOneBased++;
     if (_questionNumberOneBased > questionsPerGame) {
       // Back to the start screen
-
       _questionNumberOneBased = _startScreenNumber;
       _lastGameStats = GameStats(
           DateTime.now().difference(_gameStartTime!), _correctOnFirstAttempt);

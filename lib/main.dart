@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> ui;
+    Column ui;
     if (_gameState.shouldShowStartScreen()) {
       ui = _startScreen();
     } else {
@@ -103,16 +103,13 @@ class _MyHomePageState extends State<MyHomePage> {
               maxWidth:
                   400 // FIXME: What is the unit here? How will this look on different devices?
               ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: ui,
-          ),
+          child: ui,
         ),
       ),
     );
   }
 
-  List<Widget> _startScreen() {
+  Column _startScreen() {
     List<Widget> widgets = [];
 
     GameStats? stats = _gameState.lastGameStats();
@@ -134,20 +131,23 @@ class _MyHomePageState extends State<MyHomePage> {
           'answers right on the first attempt, and lasted for $durationString.'));
     }
 
-    widgets.add(ElevatedButton(
-        onPressed: () {
-          setState(() {
-            _gameState.start();
-          });
-        },
-        child: const Text('Start')));
+    widgets.add(SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+          onPressed: () {
+            setState(() {
+              _gameState.start();
+            });
+          },
+          child: const Text('Start')),
+    ));
 
-    return widgets;
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center, children: widgets);
   }
 
-  /// These widgets will be shown in a column in the main UI
-  List<Widget> _gameUi() {
-    return [
+  Column _gameUi() {
+    return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
       ////////////////////////////////////////////////////
       //
       // Clock
@@ -204,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       )
-    ];
+    ]);
   }
 
   void _handleAnswer() {

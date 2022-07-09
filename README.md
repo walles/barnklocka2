@@ -5,8 +5,9 @@
 Run it here: <https://walles.github.io/barnklocka2>
 
 ## TODO
-* Start screen: Before the first round, when we don't have any existing stats,
-  center the start button vertically and make it fill all space horizontally.
+* Start screen: Show a top 5 list and the result of the most recent round.
+  Primary sort key is number of correct-on-first-attempt answers, secondary is
+  how long it took.
 * Make the game 10 rounds
 * For the 10 rounds:
   * 1, 2 and 3: Whole hours
@@ -14,9 +15,7 @@ Run it here: <https://walles.github.io/barnklocka2>
   * 6, 7: Quarters
   * 8, 9: Five minute intervals
   * 10: One minute intervals
-* Start screen: Show a top 5 list and the result of the most recent round.
-  Primary sort key is number of correct-on-first-attempt answers, secondary is
-  how long it took.
+* Make the hands pointier
 * Persist top 5 list between page reloads / app restarts
 * Tune clock vs real-world clock image to make it readable and look nice
 * Consider reenabling `avoid_print` in `analysis_options.yaml`
@@ -57,3 +56,5 @@ Run it here: <https://walles.github.io/barnklocka2>
   minute spans. Pick easier flavors more often.
 * Start screen: Show stats for the most recent round. How many
   correct-at-first-attempt answers and how long it took.
+* Start screen: Before the first round, when we don't have any existing stats,
+  center the start button vertically and make it fill all space horizontally.
