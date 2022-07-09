@@ -1,5 +1,4 @@
 import 'package:barnklocka2/gamestate.dart';
-import 'package:barnklocka2/timepicker.dart';
 import 'package:intl/intl.dart';
 
 import 'package:barnklocka2/clock.dart';
@@ -63,18 +62,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  DateTime? _timestamp;
   String? _errorText;
-  final _timePicker = TimePicker();
   final GameState _gameState = GameState();
 
   late TextEditingController _timeInputController;
   late FocusNode _timeInputFocus;
-
-  DateTime _getTimestamp() {
-    _timestamp ??= _timePicker.createRandomTimestamp();
-    return _timestamp!;
-  }
 
   @override
   void initState() {
@@ -140,8 +132,8 @@ class _MyHomePageState extends State<MyHomePage> {
       //
       Flexible(
         child: Clock(
-          _getTimestamp().hour,
-          _getTimestamp().minute,
+          _gameState.getTimestamp().hour,
+          _gameState.getTimestamp().minute,
         ),
       ),
       ////////////////////////////////////////////////////
@@ -151,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          _ampm[_getTimestamp().hour],
+          _ampm[_gameState.getTimestamp().hour],
           textAlign: TextAlign.center,
           style: const TextStyle(fontSize: 35),
         ),
@@ -194,27 +186,19 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _handleAnswer() {
-    if (isValidRendering(_timeInputController.text, _getTimestamp())) {
-      //
-      // Correct!
-      //
-
+    if (_gameState.registerAnswer(_timeInputController.text, () {
+      setState(() {});
+    })) {
       // FIXME: Play a Ding! sound
 
       _timeInputController.clear();
       setState(() {
         _errorText = null;
-        _timestamp = _timePicker.createRandomTimestamp();
-        _gameState.questionAnswered();
       });
     } else {
-      //
-      // Wrong
-      //
-
       final twoDigits = NumberFormat('00');
-      final hour = _getTimestamp().hour;
-      final minute = _getTimestamp().minute;
+      final hour = _gameState.getTimestamp().hour;
+      final minute = _gameState.getTimestamp().minute;
       setState(() {
         _errorText =
             'Should be: ${twoDigits.format(hour)}${twoDigits.format(minute)}';
@@ -223,20 +207,4 @@ class _MyHomePageState extends State<MyHomePage> {
 
     _timeInputFocus.requestFocus();
   }
-}
-
-/// Checks whether the rendering ("1234" for example) is a valid rendering of
-/// the timestamp's hours and minutes.
-@visibleForTesting
-bool isValidRendering(String rendering, DateTime timestamp) {
-  final twoDigits = NumberFormat('00');
-
-  if (rendering.length == 3) {
-    rendering = '0$rendering';
-  }
-
-  final correct =
-      '${twoDigits.format(timestamp.hour)}${twoDigits.format(timestamp.minute)}';
-
-  return rendering == correct;
 }

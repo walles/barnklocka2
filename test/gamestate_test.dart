@@ -1,4 +1,4 @@
-import 'package:barnklocka2/main.dart';
+import 'package:barnklocka2/gamestate.dart';
 import 'package:test/test.dart';
 
 void main() {
