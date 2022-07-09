@@ -6,10 +6,10 @@ import 'package:intl/intl.dart';
 
 class GameState {
   static const _startScreenNumber = 0;
-  static const questionsPerGame = kDebugMode ? 2 : 10;
+  static const questionsPerGame = kDebugMode ? 2 : 5;
 
   // How difficult the timestamps should be at each round
-  static const difficulties = [1, 1, 1, 2, 2, 3, 3, 4, 4, 5];
+  static const difficulties = [1, 2, 3, 4, 5];
 
   final _timePicker = TimePicker();
 
