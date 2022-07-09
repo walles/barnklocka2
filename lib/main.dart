@@ -1,4 +1,5 @@
 import 'package:barnklocka2/gamestate.dart';
+import 'package:barnklocka2/gamestats.dart';
 import 'package:intl/intl.dart';
 
 import 'package:barnklocka2/clock.dart';
@@ -112,15 +113,36 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<Widget> _startScreen() {
-    return [
-      ElevatedButton(
-          onPressed: () {
-            setState(() {
-              _gameState.start();
-            });
-          },
-          child: const Text('Start')),
-    ];
+    List<Widget> widgets = [];
+
+    GameStats? stats = _gameState.lastGameStats();
+    if (stats != null) {
+      int minutes = stats.duration.inSeconds ~/ 60;
+      int milliseconds = stats.duration.inMilliseconds % 60000;
+
+      String durationString;
+      if (minutes == 0) {
+        durationString = '${(milliseconds / 1000).toStringAsFixed(3)}s';
+      } else {
+        NumberFormat secondsFormat = NumberFormat('00.###');
+        durationString =
+            '${minutes}m${secondsFormat.format(milliseconds / 1000.0)}s';
+      }
+
+      widgets.add(Text(
+          'Last round had ${stats.correctOnFirstAttempt}/${GameState.questionsPerGame} '
+          'answers right on the first attempt, and lasted for $durationString.'));
+    }
+
+    widgets.add(ElevatedButton(
+        onPressed: () {
+          setState(() {
+            _gameState.start();
+          });
+        },
+        child: const Text('Start')));
+
+    return widgets;
   }
 
   /// These widgets will be shown in a column in the main UI

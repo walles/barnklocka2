@@ -5,8 +5,6 @@
 Run it here: <https://walles.github.io/barnklocka2>
 
 ## TODO
-* Start screen: Show stats for the most recent round. How many
-  correct-at-first-attempt answers and how long it took.
 * Start screen: Before the first round, when we don't have any existing stats,
   center the start button vertically and make it fill all space horizontally.
 * Make the game 10 rounds
@@ -57,3 +55,5 @@ Run it here: <https://walles.github.io/barnklocka2>
   font size: https://pub.dev/packages/auto_size_text
 * Choose among whole hours, half hours, quarters, five minute spans or one
   minute spans. Pick easier flavors more often.
+* Start screen: Show stats for the most recent round. How many
+  correct-at-first-attempt answers and how long it took.

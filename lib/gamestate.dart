@@ -1,14 +1,22 @@
+import 'package:barnklocka2/gamestats.dart';
 import 'package:barnklocka2/timepicker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class GameState {
   static const _startScreenNumber = 0;
-  static const _questionsPerGame = 2; // FIXME: I think 10 is a good number
+  static const questionsPerGame = 2; // FIXME: I think 10 is a good number
 
   final _timePicker = TimePicker();
 
+  /// The current question for the user
   DateTime? _timestamp;
+
+  DateTime? _gameStartTime;
+  int _correctOnFirstAttempt = 0;
+  bool _lastAnswerWasRight = true;
+
+  GameStats? _lastGameStats;
 
   /// Question number `0` means we're on the start screen
   int _questionNumberOneBased = _startScreenNumber;
@@ -20,7 +28,11 @@ class GameState {
 
   void start() {
     assert(_questionNumberOneBased == _startScreenNumber);
+
     _questionNumberOneBased = 1;
+    _gameStartTime = DateTime.now();
+    _correctOnFirstAttempt = 0;
+    _lastAnswerWasRight = true;
   }
 
   DateTime getTimestamp() {
@@ -32,22 +44,34 @@ class GameState {
   bool registerAnswer(String answer, Function onCorrect) {
     assert(_questionNumberOneBased >= 1);
 
-    if (isValidRendering(answer, getTimestamp())) {
-      _timestamp = _timePicker.createRandomTimestamp();
-
-      _questionNumberOneBased++;
-      if (_questionNumberOneBased > _questionsPerGame) {
-        // Back to the start screen
-        _questionNumberOneBased = _startScreenNumber;
-      }
-
-      onCorrect();
-
-      return true;
+    if (!isValidRendering(answer, getTimestamp())) {
+      _lastAnswerWasRight = false;
+      return false;
     }
 
-    // FIXME: Register the wrong answer somehow
-    return false;
+    // Handle getting a correct answer
+    if (_lastAnswerWasRight) {
+      _correctOnFirstAttempt++;
+    }
+    _lastAnswerWasRight = true;
+
+    _timestamp = _timePicker.createRandomTimestamp();
+    _questionNumberOneBased++;
+    if (_questionNumberOneBased > questionsPerGame) {
+      // Back to the start screen
+
+      _questionNumberOneBased = _startScreenNumber;
+      _lastGameStats = GameStats(
+          DateTime.now().difference(_gameStartTime!), _correctOnFirstAttempt);
+    }
+
+    onCorrect();
+
+    return true;
+  }
+
+  GameStats? lastGameStats() {
+    return _lastGameStats;
   }
 }
 
