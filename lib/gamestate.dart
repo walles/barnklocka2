@@ -1,12 +1,12 @@
 import 'package:barnklocka2/gamestats.dart';
 import 'package:barnklocka2/timepicker.dart';
 import 'package:barnklocka2/toplist.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
 class GameState {
   static const _startScreenNumber = 0;
-  static const questionsPerGame = 2; // FIXME: I think 10 is a good number
+  static const questionsPerGame = kDebugMode ? 2 : 10;
 
   final _timePicker = TimePicker();
 

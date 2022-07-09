@@ -5,7 +5,6 @@
 Run it here: <https://walles.github.io/barnklocka2>
 
 ## TODO
-* Make the game 10 rounds
 * For the 10 rounds:
   * 1, 2 and 3: Whole hours
   * 4, 5: Half hours
@@ -58,3 +57,4 @@ Run it here: <https://walles.github.io/barnklocka2>
 * Start screen: Show a top 5 list and the result of the most recent round.
   Primary sort key is number of correct-on-first-attempt answers, secondary is
   how long it took.
+* Make the game 10 rounds
