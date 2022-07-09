@@ -1,3 +1,4 @@
+import 'package:barnklocka2/gamestate.dart';
 import 'package:barnklocka2/timepicker.dart';
 import 'package:intl/intl.dart';
 
@@ -65,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
   DateTime? _timestamp;
   String? _errorText;
   final _timePicker = TimePicker();
+  final GameState _gameState = GameState();
 
   late TextEditingController _timeInputController;
   late FocusNode _timeInputFocus;
@@ -91,26 +93,46 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> ui;
+    if (_gameState.shouldShowStartScreen()) {
+      ui = _startScreen();
+    } else {
+      ui = _gameUi();
+    }
+
     return Scaffold(
       appBar: AppBar(title: const Text(_name)),
       body: Container(
         alignment: Alignment.center,
         child: Container(
-            padding: const EdgeInsets.all(20.0),
-            constraints: const BoxConstraints(
-                maxWidth:
-                    400 // FIXME: What is the unit here? How will this look on different devices?
-                ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: _mainUi(),
-            )),
+          padding: const EdgeInsets.all(20.0),
+          constraints: const BoxConstraints(
+              maxWidth:
+                  400 // FIXME: What is the unit here? How will this look on different devices?
+              ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: ui,
+          ),
+        ),
       ),
     );
   }
 
+  List<Widget> _startScreen() {
+    return [
+      ElevatedButton(
+          onPressed: () {
+            setState(() {
+              _gameState.start();
+            });
+          },
+          child: const Text('Start')),
+    ];
+  }
+
   /// These widgets will be shown in a column in the main UI
-  List<Widget> _mainUi() {
+  List<Widget> _gameUi() {
     return [
       ////////////////////////////////////////////////////
       //
@@ -157,30 +179,39 @@ class _MyHomePageState extends State<MyHomePage> {
                   errorText: _errorText),
               onSubmitted: (String _) {
                 // FIXME: Only if the input looks like a time!
-                _handleButtonPress();
+                _handleAnswer();
               },
             ),
           ),
           Flexible(
             flex: 0,
             child: ElevatedButton(
-                onPressed: _handleButtonPress, child: const Text('Go!')),
+                onPressed: _handleAnswer, child: const Text('Go!')),
           )
         ],
       )
     ];
   }
 
-  void _handleButtonPress() {
+  void _handleAnswer() {
     if (isValidRendering(_timeInputController.text, _getTimestamp())) {
+      //
+      // Correct!
+      //
+
       // FIXME: Play a Ding! sound
 
       _timeInputController.clear();
       setState(() {
         _errorText = null;
         _timestamp = _timePicker.createRandomTimestamp();
+        _gameState.questionAnswered();
       });
     } else {
+      //
+      // Wrong
+      //
+
       final twoDigits = NumberFormat('00');
       final hour = _getTimestamp().hour;
       final minute = _getTimestamp().minute;
