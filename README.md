@@ -5,12 +5,6 @@
 Run it here: <https://walles.github.io/barnklocka2>
 
 ## TODO
-* For the 10 rounds:
-  * 1, 2 and 3: Whole hours
-  * 4, 5: Half hours
-  * 6, 7: Quarters
-  * 8, 9: Five minute intervals
-  * 10: One minute intervals
 * Persist top 5 list between page reloads / app restarts
 * Make the hands pointier
 * Tune clock vs real-world clock image to make it readable and look nice
@@ -58,3 +52,9 @@ Run it here: <https://walles.github.io/barnklocka2>
   Primary sort key is number of correct-on-first-attempt answers, secondary is
   how long it took.
 * Make the game 10 rounds
+* For the 10 rounds:
+  * 1, 2 and 3: Whole hours
+  * 4, 5: Half hours
+  * 6, 7: Quarters
+  * 8, 9: Five minute intervals
+  * 10: One minute intervals

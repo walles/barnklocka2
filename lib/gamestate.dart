@@ -8,6 +8,9 @@ class GameState {
   static const _startScreenNumber = 0;
   static const questionsPerGame = kDebugMode ? 2 : 10;
 
+  // How difficult the timestamps should be at each round
+  static const difficulties = [1, 1, 1, 2, 2, 3, 3, 4, 4, 5];
+
   final _timePicker = TimePicker();
 
   /// The current question for the user
@@ -34,10 +37,12 @@ class GameState {
     _gameStartTime = DateTime.now();
     _correctOnFirstAttempt = 0;
     _lastAnswerWasRight = true;
+    _timestamp = null;
   }
 
   DateTime getTimestamp() {
-    _timestamp ??= _timePicker.createRandomTimestamp();
+    _timestamp ??= _timePicker
+        .createTimestampAtDifficulty(difficulties[_questionNumberOneBased - 1]);
     return _timestamp!;
   }
 
@@ -56,7 +61,7 @@ class GameState {
     }
     _lastAnswerWasRight = true;
 
-    _timestamp = _timePicker.createRandomTimestamp();
+    _timestamp = null;
     _questionNumberOneBased++;
     if (_questionNumberOneBased > questionsPerGame) {
       // Back to the start screen

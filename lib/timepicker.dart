@@ -3,24 +3,15 @@ import 'dart:math';
 class TimePicker {
   final _random = Random();
 
-  static const _kinds = [
-    1, 1, 1, 1, 1, // whole hours
-    2, 2, 2, 2, // half hours
-    3, 3, 3, // quarters
-    4, 4, // five-minute intervals
-    5, // one-minute intervals
-  ];
-
   // Quarters, but not ones covered by easier kinds
   static const _quarters = [15, 45];
 
   // Five minute intervals, but not ones covered by easier kinds
   static const _fivers = [5, 10, 20, 25, 35, 40, 50, 55];
 
-  DateTime createRandomTimestamp() {
-    final kind = _kinds[_random.nextInt(_kinds.length)];
-
-    switch (kind) {
+  /// `difficulty` is 1-5 with 5 being the most difficult
+  DateTime createTimestampAtDifficulty(int difficulty) {
+    switch (difficulty) {
       case 1:
         return DateTime(2000, 1, 1, _random.nextInt(24), 0);
       case 2:
@@ -39,7 +30,7 @@ class TimePicker {
         return DateTime(2000, 1, 1, _random.nextInt(24), minutes);
 
       default:
-        throw ('Internal error making up a time');
+        throw ('Internal error making up a time for difficulty $difficulty');
     }
   }
 }
