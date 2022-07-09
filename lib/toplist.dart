@@ -1,5 +1,8 @@
 import 'package:barnklocka2/gamestats.dart';
 
+/// Retain a toplist of at most `size` entries. The most recent entry will
+/// always be preserved, even if it is the worst. Its index can be retrieved
+/// using `mostRecentEntry()`.
 class TopList {
   final int size;
 
@@ -46,5 +49,9 @@ class TopList {
   /// Returns an index into `list()`
   int mostRecentEntry() {
     return _mostRecentEntry;
+  }
+
+  bool isEmpty() {
+    return _list.isEmpty;
   }
 }
