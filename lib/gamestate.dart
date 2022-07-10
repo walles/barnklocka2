@@ -2,11 +2,13 @@ import 'package:barnklocka2/gamestats.dart';
 import 'package:barnklocka2/timepicker.dart';
 import 'package:barnklocka2/toplist.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 
 class GameState {
   static const _startScreenNumber = 0;
   static const questionsPerGame = kDebugMode ? 2 : 5;
+  static const _persistentTopListKey = 'toplist';
 
   // How difficult the timestamps should be at each round
   static const difficulties = [1, 2, 3, 4, 5];
@@ -20,7 +22,15 @@ class GameState {
   int _correctOnFirstAttempt = 0;
   bool _lastAnswerWasRight = true;
 
-  final TopList _toplist = TopList(5);
+  final TopList _toplist = _createTopList();
+  static TopList _createTopList() {
+    String? serialized = GetStorage().read(_persistentTopListKey);
+    if (serialized == null) {
+      return TopList(5);
+    }
+
+    return TopList.deserialize(serialized);
+  }
 
   /// Question number `0` means we're on the start screen
   int _questionNumberOneBased = _startScreenNumber;
@@ -68,6 +78,7 @@ class GameState {
       _questionNumberOneBased = _startScreenNumber;
       _toplist.add(GameStats(
           DateTime.now().difference(_gameStartTime!), _correctOnFirstAttempt));
+      GetStorage().write(_persistentTopListKey, _toplist.serialize());
     }
 
     onCorrect();

@@ -5,7 +5,7 @@
 Run it here: <https://walles.github.io/barnklocka2>
 
 ## TODO
-* Persist top 5 list between page reloads / app restarts
+* Show progress while playing, are we there yet?
 * Make the hands pointier
 * Tune clock vs real-world clock image to make it readable and look nice
 * Consider reenabling `avoid_print` in `analysis_options.yaml`
@@ -58,3 +58,4 @@ Run it here: <https://walles.github.io/barnklocka2>
   * 6, 7: Quarters
   * 8, 9: Five minute intervals
   * 10: One minute intervals
+* Persist top 5 list between page reloads / app restarts

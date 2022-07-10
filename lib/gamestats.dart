@@ -29,4 +29,26 @@ class GameStats implements Comparable<GameStats> {
   String toString() {
     return '[$correctOnFirstAttempt, $duration]';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (other.runtimeType != GameStats) {
+      return false;
+    }
+
+    GameStats otherStat = other as GameStats;
+    if (otherStat.duration != duration) {
+      return false;
+    }
+    if (otherStat.correctOnFirstAttempt != correctOnFirstAttempt) {
+      return false;
+    }
+
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    return duration.hashCode ^ correctOnFirstAttempt.hashCode;
+  }
 }

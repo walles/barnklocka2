@@ -45,4 +45,29 @@ void main() {
     expect(testMe.list(), equals([faster, slower]));
     expect(testMe.mostRecentEntry(), 0);
   });
+
+  test('Serialize empty', () {
+    const size = 2;
+    TopList original = TopList(size);
+    String serialized = original.serialize();
+    TopList deserialized = TopList.deserialize(serialized);
+
+    expect(deserialized.size, equals(size));
+    expect(deserialized.list(), equals(original.list()));
+    expect(deserialized.mostRecentEntry(), equals(-1));
+  });
+
+  test('Serialize non-empty', () {
+    const size = 2;
+    TopList original = TopList(size);
+    original.add(faster);
+    original.add(slower);
+
+    String serialized = original.serialize();
+    TopList deserialized = TopList.deserialize(serialized);
+
+    expect(deserialized.size, equals(size));
+    expect(deserialized.list(), equals(original.list()));
+    expect(deserialized.mostRecentEntry(), equals(-1));
+  });
 }
