@@ -6,8 +6,10 @@ import 'package:intl/intl.dart';
 import 'package:barnklocka2/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
