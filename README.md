@@ -6,7 +6,6 @@ Run it here: <https://walles.github.io/barnklocka2>
 
 ## TODO
 * Show progress while playing, are we there yet?
-* Make the hands pointier
 * Tune clock vs real-world clock image to make it readable and look nice
 * Consider reenabling `avoid_print` in `analysis_options.yaml`
 * Adapt clock and everything else to dark theme / light theme

@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'package:audioplayers/audioplayers.dart';
+
 void main() async {
   await GetStorage.init();
   runApp(const MyApp());
@@ -69,21 +71,31 @@ class _MyHomePageState extends State<MyHomePage> {
   String? _errorText;
   final GameState _gameState = GameState();
 
+  late AudioPlayer _audioPlayer;
   late TextEditingController _timeInputController;
   late FocusNode _timeInputFocus;
 
   @override
   void initState() {
+    // Do the opposite of dispose() here
+
     super.initState();
+
     _timeInputController = TextEditingController();
     _timeInputFocus = FocusNode();
+
+    _audioPlayer = AudioPlayer();
   }
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
-    _timeInputController.dispose();
+    // Do the opposite of initState() here
+
+    _audioPlayer.release();
+
     _timeInputFocus.dispose();
+    _timeInputController.dispose();
+
     super.dispose();
   }
 
@@ -242,7 +254,8 @@ class _MyHomePageState extends State<MyHomePage> {
     if (_gameState.registerAnswer(_timeInputController.text, () {
       setState(() {});
     })) {
-      // FIXME: Play a Ding! sound
+      // Ding!
+      _audioPlayer.play(AssetSource('correct.mp3'));
 
       _timeInputController.clear();
       setState(() {
