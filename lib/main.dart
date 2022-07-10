@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     Column ui;
-    if (_gameState.shouldShowStartScreen()) {
+    if (_gameState.shouldShowStartScreen) {
       ui = _startScreen();
     } else {
       ui = _gameUi();
@@ -125,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _topListToWidget(TopList topList) {
-    assert(!topList.isEmpty());
+    assert(!topList.isEmpty);
 
     final List<DataColumn> columns = [
       const DataColumn(
@@ -135,10 +135,10 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     List<DataRow> rows = [];
-    for (int i = 0; i < topList.list().length; i++) {
-      GameStats stats = topList.list()[i];
+    for (int i = 0; i < topList.list.length; i++) {
+      GameStats stats = topList.list[i];
       String lastCell = '';
-      if (i == topList.mostRecentEntry()) {
+      if (i == topList.mostRecentEntry) {
         lastCell = '<- You'; // ... are here
       }
 
@@ -156,8 +156,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Column _startScreen() {
     List<Widget> widgets = [];
 
-    TopList topList = _gameState.topList();
-    if (!topList.isEmpty()) {
+    TopList topList = _gameState.topList;
+    if (!topList.isEmpty) {
       widgets.add(_topListToWidget(topList));
     }
 
@@ -185,8 +185,8 @@ class _MyHomePageState extends State<MyHomePage> {
       //
       Flexible(
         child: Clock(
-          _gameState.getTimestamp().hour,
-          _gameState.getTimestamp().minute,
+          _gameState.timestamp.hour,
+          _gameState.timestamp.minute,
         ),
       ),
       ////////////////////////////////////////////////////
@@ -196,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          _ampm[_gameState.getTimestamp().hour],
+          _ampm[_gameState.timestamp.hour],
           textAlign: TextAlign.center,
           style: const TextStyle(fontSize: 35),
         ),
@@ -250,8 +250,8 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     } else {
       final twoDigits = NumberFormat('00');
-      final hour = _gameState.getTimestamp().hour;
-      final minute = _gameState.getTimestamp().minute;
+      final hour = _gameState.timestamp.hour;
+      final minute = _gameState.timestamp.minute;
       setState(() {
         _errorText =
             'Should be: ${twoDigits.format(hour)}${twoDigits.format(minute)}';

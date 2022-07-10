@@ -43,16 +43,16 @@ class TopList {
     _list.removeLast();
   }
 
-  List<GameStats> list() {
+  List<GameStats> get list {
     return _list;
   }
 
   /// Returns an index into `list()`
-  int mostRecentEntry() {
+  int get mostRecentEntry {
     return _mostRecentEntry;
   }
 
-  bool isEmpty() {
+  bool get isEmpty {
     return _list.isEmpty;
   }
 

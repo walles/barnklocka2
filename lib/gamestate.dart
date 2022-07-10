@@ -36,7 +36,7 @@ class GameState {
   int _questionNumberOneBased = _startScreenNumber;
 
   /// Otherwise we're inside of a game
-  bool shouldShowStartScreen() {
+  bool get shouldShowStartScreen {
     return _questionNumberOneBased < 1;
   }
 
@@ -50,7 +50,7 @@ class GameState {
     _timestamp = null;
   }
 
-  DateTime getTimestamp() {
+  DateTime get timestamp {
     _timestamp ??= _timePicker
         .createTimestampAtDifficulty(difficulties[_questionNumberOneBased - 1]);
     return _timestamp!;
@@ -60,7 +60,7 @@ class GameState {
   bool registerAnswer(String answer, Function onCorrect) {
     assert(_questionNumberOneBased >= 1);
 
-    if (!isValidRendering(answer, getTimestamp())) {
+    if (!isValidRendering(answer, timestamp)) {
       _lastAnswerWasRight = false;
       return false;
     }
@@ -86,7 +86,7 @@ class GameState {
     return true;
   }
 
-  TopList topList() {
+  TopList get topList {
     return _toplist;
   }
 }

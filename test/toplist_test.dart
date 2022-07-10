@@ -12,8 +12,8 @@ void main() {
     testMe.add(faster);
     testMe.add(slower);
 
-    expect(testMe.list(), equals([faster, slower]));
-    expect(testMe.mostRecentEntry(), equals(1));
+    expect(testMe.list, equals([faster, slower]));
+    expect(testMe.mostRecentEntry, equals(1));
   });
 
   test('Fastest first (additions in other order)', () {
@@ -21,8 +21,8 @@ void main() {
     testMe.add(slower);
     testMe.add(faster);
 
-    expect(testMe.list(), equals([faster, slower]));
-    expect(testMe.mostRecentEntry(), equals(0));
+    expect(testMe.list, equals([faster, slower]));
+    expect(testMe.mostRecentEntry, equals(0));
   });
 
   test('Evicting saves the most recent entry even if it is the worst one', () {
@@ -32,8 +32,8 @@ void main() {
     testMe.add(worst);
 
     // Evict slower, because we always retain the most recent entry
-    expect(testMe.list(), equals([faster, worst]));
-    expect(testMe.mostRecentEntry(), 1);
+    expect(testMe.list, equals([faster, worst]));
+    expect(testMe.mostRecentEntry, 1);
   });
 
   test('Evicting the worst entry', () {
@@ -42,8 +42,8 @@ void main() {
     testMe.add(slower);
     testMe.add(faster);
 
-    expect(testMe.list(), equals([faster, slower]));
-    expect(testMe.mostRecentEntry(), 0);
+    expect(testMe.list, equals([faster, slower]));
+    expect(testMe.mostRecentEntry, 0);
   });
 
   test('Serialize empty', () {
@@ -53,8 +53,8 @@ void main() {
     TopList deserialized = TopList.deserialize(serialized);
 
     expect(deserialized.size, equals(size));
-    expect(deserialized.list(), equals(original.list()));
-    expect(deserialized.mostRecentEntry(), equals(-1));
+    expect(deserialized.list, equals(original.list));
+    expect(deserialized.mostRecentEntry, equals(-1));
   });
 
   test('Serialize non-empty', () {
@@ -67,7 +67,7 @@ void main() {
     TopList deserialized = TopList.deserialize(serialized);
 
     expect(deserialized.size, equals(size));
-    expect(deserialized.list(), equals(original.list()));
-    expect(deserialized.mostRecentEntry(), equals(-1));
+    expect(deserialized.list, equals(original.list));
+    expect(deserialized.mostRecentEntry, equals(-1));
   });
 }
