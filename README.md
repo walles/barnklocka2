@@ -5,7 +5,9 @@
 Run it here: <https://walles.github.io/barnklocka2>
 
 ## TODO
-* Persist top 5 list between page reloads / app restarts
+* Persist top 5 list between page reloads / app restarts. shared_preferences
+  perhaps or get_storage?
+* Show progress while playing, are we there yet?
 * Make the hands pointier
 * Tune clock vs real-world clock image to make it readable and look nice
 * Consider reenabling `avoid_print` in `analysis_options.yaml`
