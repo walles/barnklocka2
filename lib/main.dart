@@ -1,6 +1,7 @@
 import 'package:barnklocka2/gamestate.dart';
 import 'package:barnklocka2/gamestats.dart';
 import 'package:barnklocka2/toplist.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 
 import 'package:barnklocka2/clock.dart';
@@ -55,6 +56,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: _name,
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', ''),
+        Locale('se', ''),
+      ],
       home: MyHomePage(),
     );
   }
