@@ -18,36 +18,6 @@ void main() async {
 }
 
 const _name = 'Johans Barnklocka II';
-const _ampm = [
-  // 0-5
-  'Midnight',
-  'Morning',
-  'Morning',
-  'Morning',
-  'Morning',
-  'Morning',
-  // 6-11
-  'Morning',
-  'Morning',
-  'Morning',
-  'Morning',
-  'Morning',
-  'Morning',
-  // 12-17
-  'Noon',
-  'Afternoon',
-  'Afternoon',
-  'Afternoon',
-  'Afternoon',
-  'Afternoon',
-  // 18-23
-  'Evening',
-  'Evening',
-  'Evening',
-  'Evening',
-  'Evening',
-  'Evening',
-];
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -201,6 +171,40 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: widgets);
   }
 
+  String _ampm(int hourOfDay) {
+    final l10n = AppLocalizations.of(context)!;
+    return [
+      // 0-5
+      l10n.amPm00h,
+      l10n.amPm01h,
+      l10n.amPm02h,
+      l10n.amPm03h,
+      l10n.amPm04h,
+      l10n.amPm05h,
+      // 6-11
+      l10n.amPm06h,
+      l10n.amPm07h,
+      l10n.amPm08h,
+      l10n.amPm09h,
+      l10n.amPm10h,
+      l10n.amPm11h,
+      // 12-17
+      l10n.amPm12h,
+      l10n.amPm13h,
+      l10n.amPm14h,
+      l10n.amPm15h,
+      l10n.amPm16h,
+      l10n.amPm17h,
+      // 18-23
+      l10n.amPm18h,
+      l10n.amPm19h,
+      l10n.amPm20h,
+      l10n.amPm21h,
+      l10n.amPm22h,
+      l10n.amPm23h,
+    ][hourOfDay];
+  }
+
   Column _gameUi() {
     return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
       ////////////////////////////////////////////////////
@@ -220,7 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          _ampm[_gameState.timestamp.hour],
+          _ampm(_gameState.timestamp.hour),
           textAlign: TextAlign.center,
           style: const TextStyle(fontSize: 35),
         ),
