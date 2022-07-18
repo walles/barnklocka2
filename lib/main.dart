@@ -1,7 +1,6 @@
 import 'package:barnklocka2/gamestate.dart';
 import 'package:barnklocka2/gamestats.dart';
 import 'package:barnklocka2/toplist.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 
 import 'package:barnklocka2/clock.dart';
@@ -10,6 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'package:audioplayers/audioplayers.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   await GetStorage.init();
@@ -56,14 +57,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: _name,
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: [
-        Locale('en', ''),
-        Locale('se', ''),
-      ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: MyHomePage(),
     );
   }
@@ -149,8 +144,9 @@ class _MyHomePageState extends State<MyHomePage> {
     assert(!topList.isEmpty);
 
     final List<DataColumn> columns = [
-      const DataColumn(
-          label: Text('Correct'), tooltip: 'Correct on first attempt'),
+      DataColumn(
+          label: Text(AppLocalizations.of(context)!.tableHeadingCorrect),
+          tooltip: 'Correct on first attempt'),
       const DataColumn(label: Text('Duration')),
       const DataColumn(label: SizedBox.shrink()),
     ];
