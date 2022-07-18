@@ -1,3 +1,6 @@
 {
-    "tableHeadingCorrect": "Correct"
+    "tableHeadingCorrect": "Correct",
+    "tableHeadingCorrectOnFirstAttempt": "Correct on first attempt",
+    "tableHeadingDuration": "Duration",
+    "tableRowLatest": "Latest"
 }

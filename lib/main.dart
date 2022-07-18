@@ -143,11 +143,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _topListToWidget(TopList topList) {
     assert(!topList.isEmpty);
 
+    final l10n = AppLocalizations.of(context)!;
     final List<DataColumn> columns = [
       DataColumn(
-          label: Text(AppLocalizations.of(context)!.tableHeadingCorrect),
-          tooltip: 'Correct on first attempt'),
-      const DataColumn(label: Text('Duration')),
+          label: Text(l10n.tableHeadingCorrect),
+          tooltip: l10n.tableHeadingCorrectOnFirstAttempt),
+      DataColumn(label: Text(l10n.tableHeadingDuration)),
       const DataColumn(label: SizedBox.shrink()),
     ];
 
@@ -156,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
       GameStats stats = topList.list[i];
       String lastCell = '';
       if (i == topList.mostRecentEntry) {
-        lastCell = '<- You'; // ... are here
+        lastCell = '<- ${l10n.tableRowLatest}';
       }
 
       rows.add(DataRow(cells: [

@@ -1,3 +1,6 @@
 {
-  "tableHeadingCorrect": "Rätt"
+  "tableHeadingCorrect": "Rätt",
+  "tableHeadingCorrectOnFirstAttempt": "Rätt på första försöket",
+  "tableHeadingDuration": "Tid",
+  "tableRowLatest": "Senaste"
 }
