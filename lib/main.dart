@@ -128,14 +128,20 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  /// NumberFormat with the right locale
+  NumberFormat _numberFormat(String format) {
+    return NumberFormat(format, Localizations.localeOf(context).toString());
+  }
+
   String _durationToString(Duration duration) {
     int minutes = duration.inSeconds ~/ 60;
     int milliseconds = duration.inMilliseconds % 60000;
 
     if (minutes == 0) {
-      return '${(milliseconds / 1000).toStringAsFixed(3)}s';
+      final secondsFormat = _numberFormat('#0.000');
+      return '${secondsFormat.format(milliseconds / 1000)}s';
     } else {
-      NumberFormat secondsFormat = NumberFormat('00.###');
+      final secondsFormat = _numberFormat('00.000');
       return '${minutes}m${secondsFormat.format(milliseconds / 1000.0)}s';
     }
   }
@@ -268,7 +274,7 @@ class _MyHomePageState extends State<MyHomePage> {
         _errorText = null;
       });
     } else {
-      final twoDigits = NumberFormat('00');
+      final twoDigits = _numberFormat('00');
       final hour = _gameState.timestamp.hour;
       final minute = _gameState.timestamp.minute;
       setState(() {
