@@ -133,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
       GameStats stats = topList.list[i];
       String lastCell = '';
       if (i == topList.mostRecentEntry) {
-        lastCell = '<- ${l10n.tableRowLatest}';
+        lastCell = '<-';
       }
 
       rows.add(DataRow(cells: [
@@ -228,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Text(
           _ampm(_gameState.timestamp.hour),
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 35),
+          style: const TextStyle(fontSize: 30),
         ),
       ),
       ////////////////////////////////////////////////////
