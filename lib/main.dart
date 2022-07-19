@@ -10,42 +10,14 @@ import 'package:get_storage/get_storage.dart';
 
 import 'package:audioplayers/audioplayers.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 void main() async {
   await GetStorage.init();
   runApp(const MyApp());
 }
 
 const _name = 'Johans Barnklocka II';
-const _ampm = [
-  // 0-5
-  'Midnight',
-  'Morning',
-  'Morning',
-  'Morning',
-  'Morning',
-  'Morning',
-  // 6-11
-  'Morning',
-  'Morning',
-  'Morning',
-  'Morning',
-  'Morning',
-  'Morning',
-  // 12-17
-  'Noon',
-  'Afternoon',
-  'Afternoon',
-  'Afternoon',
-  'Afternoon',
-  'Afternoon',
-  // 18-23
-  'Evening',
-  'Evening',
-  'Evening',
-  'Evening',
-  'Evening',
-  'Evening',
-];
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -55,6 +27,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: _name,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: MyHomePage(),
     );
   }
@@ -124,14 +98,20 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  /// NumberFormat with the right locale
+  NumberFormat _numberFormat(String format) {
+    return NumberFormat(format, Localizations.localeOf(context).toString());
+  }
+
   String _durationToString(Duration duration) {
     int minutes = duration.inSeconds ~/ 60;
     int milliseconds = duration.inMilliseconds % 60000;
 
     if (minutes == 0) {
-      return '${(milliseconds / 1000).toStringAsFixed(3)}s';
+      final secondsFormat = _numberFormat('#0.000');
+      return '${secondsFormat.format(milliseconds / 1000)}s';
     } else {
-      NumberFormat secondsFormat = NumberFormat('00.###');
+      final secondsFormat = _numberFormat('00.000');
       return '${minutes}m${secondsFormat.format(milliseconds / 1000.0)}s';
     }
   }
@@ -139,10 +119,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _topListToWidget(TopList topList) {
     assert(!topList.isEmpty);
 
+    final l10n = AppLocalizations.of(context)!;
     final List<DataColumn> columns = [
-      const DataColumn(
-          label: Text('Correct'), tooltip: 'Correct on first attempt'),
-      const DataColumn(label: Text('Duration')),
+      DataColumn(
+          label: Text(l10n.tableHeadingCorrect),
+          tooltip: l10n.tableHeadingCorrectOnFirstAttempt),
+      DataColumn(label: Text(l10n.tableHeadingDuration)),
       const DataColumn(label: SizedBox.shrink()),
     ];
 
@@ -151,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
       GameStats stats = topList.list[i];
       String lastCell = '';
       if (i == topList.mostRecentEntry) {
-        lastCell = '<- You'; // ... are here
+        lastCell = '<- ${l10n.tableRowLatest}';
       }
 
       rows.add(DataRow(cells: [
@@ -182,14 +164,50 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           },
           autofocus: true,
-          child: const Text('Start')),
+          child: Text(AppLocalizations.of(context)!.buttonStart)),
     ));
 
     return Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: widgets);
   }
 
+  String _ampm(int hourOfDay) {
+    final l10n = AppLocalizations.of(context)!;
+    return [
+      // 0-5
+      l10n.amPm00h,
+      l10n.amPm01h,
+      l10n.amPm02h,
+      l10n.amPm03h,
+      l10n.amPm04h,
+      l10n.amPm05h,
+      // 6-11
+      l10n.amPm06h,
+      l10n.amPm07h,
+      l10n.amPm08h,
+      l10n.amPm09h,
+      l10n.amPm10h,
+      l10n.amPm11h,
+      // 12-17
+      l10n.amPm12h,
+      l10n.amPm13h,
+      l10n.amPm14h,
+      l10n.amPm15h,
+      l10n.amPm16h,
+      l10n.amPm17h,
+      // 18-23
+      l10n.amPm18h,
+      l10n.amPm19h,
+      l10n.amPm20h,
+      l10n.amPm21h,
+      l10n.amPm22h,
+      l10n.amPm23h,
+    ][hourOfDay];
+  }
+
   Column _gameUi() {
+    final l10n = AppLocalizations.of(context)!;
+
     return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
       ////////////////////////////////////////////////////
       //
@@ -208,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          _ampm[_gameState.timestamp.hour],
+          _ampm(_gameState.timestamp.hour),
           textAlign: TextAlign.center,
           style: const TextStyle(fontSize: 35),
         ),
@@ -232,7 +250,7 @@ class _MyHomePageState extends State<MyHomePage> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   hintText: 'HHMM',
-                  labelText: 'Digital time',
+                  labelText: l10n.labelDigitalTime,
                   errorText: _errorText),
               onSubmitted: (String _) {
                 // FIXME: Only if the input looks like a time!
@@ -243,7 +261,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Flexible(
             flex: 0,
             child: ElevatedButton(
-                onPressed: _handleAnswer, child: const Text('Go!')),
+                onPressed: _handleAnswer, child: Text(l10n.buttonGoExcl)),
           )
         ],
       )
@@ -262,12 +280,13 @@ class _MyHomePageState extends State<MyHomePage> {
         _errorText = null;
       });
     } else {
-      final twoDigits = NumberFormat('00');
+      final l10n = AppLocalizations.of(context)!;
+      final twoDigits = _numberFormat('00');
       final hour = _gameState.timestamp.hour;
       final minute = _gameState.timestamp.minute;
       setState(() {
         _errorText =
-            'Should be: ${twoDigits.format(hour)}${twoDigits.format(minute)}';
+            '${l10n.textFieldHintShouldBe}: ${twoDigits.format(hour)}${twoDigits.format(minute)}';
       });
     }
 
