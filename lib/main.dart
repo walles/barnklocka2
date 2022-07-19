@@ -164,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           },
           autofocus: true,
-          child: const Text('Start')),
+          child: Text(AppLocalizations.of(context)!.buttonStart)),
     ));
 
     return Column(
@@ -206,6 +206,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Column _gameUi() {
+    final l10n = AppLocalizations.of(context)!;
+
     return Column(mainAxisAlignment: MainAxisAlignment.start, children: [
       ////////////////////////////////////////////////////
       //
@@ -248,7 +250,7 @@ class _MyHomePageState extends State<MyHomePage> {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   hintText: 'HHMM',
-                  labelText: 'Digital time',
+                  labelText: l10n.labelDigitalTime,
                   errorText: _errorText),
               onSubmitted: (String _) {
                 // FIXME: Only if the input looks like a time!
@@ -259,7 +261,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Flexible(
             flex: 0,
             child: ElevatedButton(
-                onPressed: _handleAnswer, child: const Text('Go!')),
+                onPressed: _handleAnswer, child: Text(l10n.buttonGoExcl)),
           )
         ],
       )
@@ -278,12 +280,13 @@ class _MyHomePageState extends State<MyHomePage> {
         _errorText = null;
       });
     } else {
+      final l10n = AppLocalizations.of(context)!;
       final twoDigits = _numberFormat('00');
       final hour = _gameState.timestamp.hour;
       final minute = _gameState.timestamp.minute;
       setState(() {
         _errorText =
-            'Should be: ${twoDigits.format(hour)}${twoDigits.format(minute)}';
+            '${l10n.textFieldHintShouldBe}: ${twoDigits.format(hour)}${twoDigits.format(minute)}';
       });
     }
 

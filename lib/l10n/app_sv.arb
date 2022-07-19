@@ -26,5 +26,9 @@
   "amPm20h": "Kväll",
   "amPm21h": "Kväll",
   "amPm22h": "Kväll",
-  "amPm23h": "Kväll"
+  "amPm23h": "Kväll",
+  "buttonStart": "Börja",
+  "buttonGoExcl": "Kör!",
+  "labelDigitalTime": "Digital tid",
+  "textFieldHintShouldBe": "Rätt svar"
 }

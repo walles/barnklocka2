@@ -26,5 +26,9 @@
     "amPm20h": "Evening",
     "amPm21h": "Evening",
     "amPm22h": "Evening",
-    "amPm23h": "Evening"
+    "amPm23h": "Evening",
+    "buttonStart": "Start",
+    "buttonGoExcl": "Go!",
+    "labelDigitalTime": "Digital time",
+    "textFieldHintShouldBe": "Should be"
 }
