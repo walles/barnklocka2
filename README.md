@@ -9,7 +9,6 @@ Run it here: <https://walles.github.io/barnklocka2>
 - Show progress while playing, are we there yet?
 - Tune clock vs real-world clock image to make it readable and look nice
 - Consider reenabling `avoid_print` in `analysis_options.yaml`
-- Adapt clock and everything else to dark theme / light theme
 - Enable the Go! button and text field entry only when the text field contains a
   valid (although not necessarily correct) time
 
@@ -60,3 +59,4 @@ Run it here: <https://walles.github.io/barnklocka2>
   - 8, 9: Five minute intervals
   - 10: One minute intervals
 - Persist top 5 list between page reloads / app restarts
+- Adapt clock and everything else to dark theme / light theme

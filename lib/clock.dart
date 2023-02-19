@@ -22,8 +22,8 @@ class _Clock extends State<Clock> {
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 1.0,
-      child:
-          CustomPaint(painter: _ClockPainter(widget._hours, widget._minutes)),
+      child: CustomPaint(
+          painter: _ClockPainter(context, widget._hours, widget._minutes)),
     );
   }
 }
@@ -32,7 +32,9 @@ class _ClockPainter extends CustomPainter {
   final int _hours;
   final int _minutes;
 
-  _ClockPainter(int hours, int minutes)
+  final BuildContext context;
+
+  _ClockPainter(this.context, int hours, int minutes)
       : _hours = hours,
         _minutes = minutes;
 
@@ -53,7 +55,10 @@ class _ClockPainter extends CustomPainter {
 
   void _paintClockFaceBackground(Canvas canvas, double diameter) {
     final paint = Paint();
-    paint.color = Colors.white;
+
+    final colorScheme = Theme.of(context).colorScheme;
+
+    paint.color = colorScheme.background;
     paint.style = PaintingStyle.fill;
     canvas.drawCircle(Offset(diameter / 2, diameter / 2), diameter / 2, paint);
   }
@@ -62,8 +67,10 @@ class _ClockPainter extends CustomPainter {
     final radius = diameter / 2;
     final numberPlacementRadius = radius * .8;
 
+    final colorScheme = Theme.of(context).colorScheme;
+
     final style = TextStyle(
-      color: Colors.black,
+      color: colorScheme.onBackground,
       fontSize: radius * .2,
     );
 
@@ -101,8 +108,9 @@ class _ClockPainter extends CustomPainter {
     final backExtent = radius * .1;
 
     final paint = Paint();
+    final colorScheme = Theme.of(context).colorScheme;
     paint.strokeWidth = width;
-    paint.color = Colors.black;
+    paint.color = colorScheme.onBackground;
     paint.style = PaintingStyle.stroke;
 
     canvas.save();
@@ -138,8 +146,9 @@ class _ClockPainter extends CustomPainter {
     final width = radius * widthFactor;
 
     final paint = Paint();
+    final colorScheme = Theme.of(context).colorScheme;
     paint.strokeWidth = width;
-    paint.color = Colors.black;
+    paint.color = colorScheme.onBackground;
     paint.style = PaintingStyle.stroke;
 
     const fullRotation = pi * 2;
