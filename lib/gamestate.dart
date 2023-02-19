@@ -95,6 +95,8 @@ class GameState {
 /// the timestamp's hours and minutes.
 @visibleForTesting
 bool isValidRendering(String rendering, DateTime timestamp) {
+  rendering = rendering.replaceAll(':', '');
+
   final twoDigits = NumberFormat('00');
 
   if (rendering.length == 3) {
